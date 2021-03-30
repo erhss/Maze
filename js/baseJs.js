@@ -18,7 +18,7 @@ function init() {
   document.body.appendChild(renderer.domElement);           // dom
 
 
-  const texture = new THREE.CubeTextureLoader().load([    // skybox loader. Generates skybox for our forest
+  const texture = new THREE.CubeTextureLoader().load([    // skybox loader. Generates skybox for maze
       './raw/posx.jpg',
       './raw/negx.jpg',
       './raw/posy.jpg',
@@ -46,7 +46,7 @@ function init() {
   animate();
 }
 
-function animate() {                                     // renders (on a different function for future if we want controls)
+function animate() {                                     // renders (on a different function for future controls)
   renderer.render(scene, camera);
   requestAnimationFrame(animate);
   
