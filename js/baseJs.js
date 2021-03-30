@@ -19,12 +19,12 @@ function init() {
 
 
   const texture = new THREE.CubeTextureLoader().load([    // skybox loader. Generates skybox for our forest
-      'raw/posx.jpg',
-      'raw/negx.jpg',
-      'raw/posy.jpg',
-      'raw/negy.jpg',
-      'raw/posz.jpg',
-      'raw/negz.jpg',
+      './raw/posx.jpg',
+      './raw/negx.jpg',
+      './raw/posy.jpg',
+      './raw/negy.jpg',
+      './raw/posz.jpg',
+      './raw/negz.jpg',
   ]);
   scene.background = texture;                           // sets the background for the scene as cubebox
 
