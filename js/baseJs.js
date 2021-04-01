@@ -10,9 +10,8 @@ function init() {
     1000
   );            // sets camera variables
   
-  camera.position.set(90, 15, 25);  // sets camera position inside the cube
-  camera.position.set.z = 5;
-  camera.position.set.y = 0;
+  camera.position.set(50, 2, 0);  // sets camera position inside the cube
+
 
   renderer = new THREE.WebGLRenderer({ antialias: true });  // antiailas
   renderer.setSize(window.innerWidth, window.innerHeight);  // render size
@@ -33,7 +32,11 @@ function init() {
   amLight = new THREE.AmbientLight(0xffffff, 0.2);
   scene.add(amLight);
 
-  var texture1 = new THREE.TextureLoader().load("./raw/ground.jpg");
+  var texture1 = new THREE.TextureLoader().load("./raw/ground2.jpg", function ( texture ){
+    texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+    texture.offset.set( 0, 0 );
+    texture.repeat.set( 100, 100 );
+  });
 
   const plane = new THREE.Mesh(             // creates a plane and mesh
   new THREE.BoxGeometry(400, 400,1),
