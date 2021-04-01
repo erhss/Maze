@@ -11,6 +11,8 @@ function init() {
   );            // sets camera variables
   
   camera.position.set(90, 15, 25);  // sets camera position inside the cube
+  camera.position.set.z = 5;
+  camera.position.set.y = 0;
 
   renderer = new THREE.WebGLRenderer({ antialias: true });  // antiailas
   renderer.setSize(window.innerWidth, window.innerHeight);  // render size
@@ -28,11 +30,19 @@ function init() {
   ]);
   scene.background = texture;                           // sets the background for the scene as cubebox
 
+  amLight = new THREE.AmbientLight(0xffffff, 0.2);
+  scene.add(amLight);
+
+  var texture1 = new THREE.TextureLoader().load("./raw/ground.jpg");
 
   const plane = new THREE.Mesh(             // creates a plane and mesh
-  new THREE.BoxGeometry(400, 400,1))      // creates a square cube plane for terrain
-  plane.material.color.setHex( 0xF8F8F8 );
+  new THREE.BoxGeometry(400, 400,1),
+  new THREE.MeshPhongMaterial({
+    map:texture1
+  }))        // creates a square cube plane for terrain
+  plane.material.color.setHex( 0x0fffff );
   plane.rotation.x = -Math.PI/2;          // Make the plane horizontal instead of vertical
+  
   scene.add(plane);
 
     
