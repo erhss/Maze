@@ -12,7 +12,7 @@ function init() {
     1000
   );            // sets camera variables
   
-  camera.position.set(50, 10, 0);  // sets camera position inside the cube (x (distance), y(height))
+  camera.position.set(50, 20, 0);  // sets camera position inside the cube (x (distance), y(height))
 
 
   renderer = new THREE.WebGLRenderer({ antialias: true });  // antiailas

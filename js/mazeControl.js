@@ -8,7 +8,7 @@ var clock = new THREE.Clock();
 // testing box 
 const box = new THREE.Mesh(
     new THREE.BoxGeometry(20, 20, 20))
-box.position.set(-10, 10, 1);         // x, y, z (since we did rotation, y is Up/down)
+box.position.set(50, 10, -70);         // x, y, z (since we did rotation, y is Up/down)
 box.material.color.setHex(0x0000ff)  // color of box
 scene.add(box);
 
