@@ -9,7 +9,6 @@ let MAX_SIZE = 200
 
 var wallText;
 
-function init() {
     
     // Wall texture
     wallText = new THREE.TextureLoader().load("./raw/wallText2.jpg", function ( texture ){
@@ -23,7 +22,7 @@ function init() {
       _createMazeWall()
 
        
-}
+
 
 function _createMazeWall(){
     // code for maze wall
@@ -72,4 +71,4 @@ function _createMainWall(){
 }
 
 
-init()
+
