@@ -14,7 +14,7 @@ scene.add(box);
 
 const menuPanel = document.getElementById('menuPanel');
 const startButton = document.getElementById('startButton');
-document.body.appendChild(renderer.domElement);
+
 
 
 startButton.addEventListener('click', function () {
