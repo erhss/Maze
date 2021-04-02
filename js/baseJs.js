@@ -1,3 +1,5 @@
+// https://www.pinterest.com/pin/336081190933901701/ Ground texture and wall texture reference (future)
+
 
 var scene, camera, renderer; // local variables scene, camera, renderer
 
@@ -10,13 +12,16 @@ function init() {
     1000
   );            // sets camera variables
   
-  camera.position.set(50, 2, 0);  // sets camera position inside the cube
+  camera.position.set(50, 10, 0);  // sets camera position inside the cube (x (distance), y(height))
 
 
   renderer = new THREE.WebGLRenderer({ antialias: true });  // antiailas
   renderer.setSize(window.innerWidth, window.innerHeight);  // render size
-  renderer.domElement.id = "canvas";                        // dom id for html
   document.body.appendChild(renderer.domElement);           // dom
+
+  window.addEventListener('resize', () => {
+    resizeWindowChanges();
+    });
 
 
   const texture = new THREE.CubeTextureLoader().load([    // skybox loader. Generates skybox for maze
@@ -32,7 +37,7 @@ function init() {
   amLight = new THREE.AmbientLight(0xffffff, 0.2);
   scene.add(amLight);
 
-  var texture1 = new THREE.TextureLoader().load("./raw/ground2.jpg", function ( texture ){
+  let texture1 = new THREE.TextureLoader().load("./raw/ground2.jpg", function ( texture ){
     texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
     texture.offset.set( 0, 0 );
     texture.repeat.set( 100, 100 );
@@ -48,21 +53,22 @@ function init() {
   
   scene.add(plane);
 
-    
-  // controls for zooming
-  controls = new THREE.OrbitControls(camera, renderer.domElement);
-  controls.enabled = true;
-  controls.minDistance = 0;
-  controls.maxDistance = 500;
-
 
   animate();
+}
+
+// When widow size is changed, fixes the scene
+function resizeWindowChanges(){
+    camera.aspect = window.innerWidth / window.innerHeight;
+		camera.updateProjectionMatrix();
+		renderer.setSize( window.innerWidth, window.innerHeight );
+		render();
 }
 
 function animate() {                                     // renders (on a different function for future controls)
   renderer.render(scene, camera);
   requestAnimationFrame(animate);
-  
+
 }
 
 init();                                                  // initialize the display (runs at start)
