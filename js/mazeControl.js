@@ -38,7 +38,7 @@ addEventListener('keyup', (e)=>{
 
 
 function processKeyboard(delta){            // Uses time-delta so that speed is not dependent on framerate
-    let speed = 10;
+    let speed = 40;
     let actualSpeed = speed * delta;
 
     if (keyboard['w'] || keyboard['ArrowUp']){
