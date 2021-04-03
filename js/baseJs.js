@@ -12,7 +12,7 @@ function init() {
     1000
   );            // sets camera variables
   
-  camera.position.set(50, 20, 0);  // sets camera position inside the cube (x (distance), y(height))
+  camera.position.set(20, 20, 0);  // sets camera position inside the cube (x (distance), y(height))
 
 
   renderer = new THREE.WebGLRenderer({ antialias: true });  // antiailas
@@ -48,7 +48,7 @@ function init() {
   new THREE.MeshPhongMaterial({
     map:texture1
   }))        // creates a square cube plane for terrain
-  plane.material.color.setHex( 0x0fffff );
+  plane.material.color.setHex( 0x0ffff0 );
   plane.rotation.x = -Math.PI/2;          // Make the plane horizontal instead of vertical
   
   scene.add(plane);

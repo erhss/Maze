@@ -19,9 +19,15 @@ var wallText;
 
       _createMainWall()
 
+      _addLampPosts()
+
       _createMazeWall()
 
        
+
+function _addLampPosts(){
+    // code for lamps
+}
 
 
 function _createMazeWall(){
@@ -37,7 +43,7 @@ function _createMainWall(){
         map:wallText
       })) // length, width, height
     wallf.position.set(MIN_SIZE, wallHeight/2, 0);         // x, y, z (since we did rotation, y is Up/down)
-    wallf.material.color.setHex(0xffffff) // color (makes it bright)
+    wallf.material.color.setHex(0xff0000) // color (makes it bright)
   scene.add(wallf);
 
   const wallb = new THREE.Mesh(
@@ -46,7 +52,7 @@ function _createMainWall(){
         map:wallText
       })) // length, width, height
     wallb.position.set(MAX_SIZE, wallHeight/2, 0);         // x, y, z (since we did rotation, y is Up/down)
-    wallb.material.color.setHex(0xffffff) 
+    wallb.material.color.setHex(0xff0000) 
   scene.add(wallb);
 
   const walll = new THREE.Mesh(
@@ -55,7 +61,7 @@ function _createMainWall(){
         map:wallText
       })) // length, width, height
     walll.position.set(0, wallHeight/2, MAX_SIZE);         // x, y, z (since we did rotation, y is Up/down)
-    walll.material.color.setHex(0xffffff) 
+    walll.material.color.setHex(0xff0000) 
   scene.add(walll);
 
   const wallr = new THREE.Mesh(
@@ -64,7 +70,7 @@ function _createMainWall(){
         map:wallText
       })) // length, width, height
     wallr.position.set(0, wallHeight/2, MIN_SIZE);         // x, y, z (since we did rotation, y is Up/down)
-    wallr.material.color.setHex(0xffffff) 
+    wallr.material.color.setHex(0xff0000) 
   scene.add(wallr);
 
   // <-- End Main Wall 
