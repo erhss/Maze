@@ -1,2 +1,2 @@
 # maze
-Cosc 3306
+Custom Maze built using threejs library
