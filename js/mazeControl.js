@@ -40,7 +40,7 @@ addEventListener('keyup', (e)=>{
 function processKeyboard(delta){            // Uses time-delta so that speed is not dependent on framerate
     let speed = 50;
     let actualSpeed = speed * delta;
-
+    
     if (keyboard['w'] || keyboard['ArrowUp']){
         controls.moveForward(actualSpeed);
     }
@@ -49,23 +49,44 @@ function processKeyboard(delta){            // Uses time-delta so that speed is 
         controls.moveForward(-actualSpeed)
     }
 
-    if (keyboard['a']){
+    if (keyboard['a'] || keyboard['ArrowLeft']){
         controls.moveRight(-actualSpeed);
     }
 
-    if (keyboard['d']){
+    if (keyboard['d'] || keyboard['ArrowRight']){
         controls.moveRight(actualSpeed);
     }
+    //drawScene();
 }
 
 
 
 function drawScene() {
+    
+    // Future raycast potential addons for collision detection. 
+
+    // raycaster.setFromCamera( new THREE.Vector2(), camera ); 
+
+    // var objects = raycaster.intersectObjects(scene.children);                    // testing raycast for collision
+    //         if (objects.length <=1) {
+    //             for (var i in objects) {
+    //               objects[i].object.material.color.set( 0xffffff );            
+    //             }
+    //         }
+    //         else{
+    //             for (var i in objects) {
+    //                 objects[i].object.material.color.set( 0xff00ff );            
+    //               }
+
+    //         } 
+
     renderer.render(scene, camera);
     let delta = clock.getDelta();
     processKeyboard(delta);
+
     requestAnimationFrame(drawScene);
 }
+
 
 drawScene();
 

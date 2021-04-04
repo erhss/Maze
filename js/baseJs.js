@@ -3,6 +3,8 @@
 
 var scene, camera, renderer; // local variables scene, camera, renderer
 
+//var raycaster = new THREE.Raycaster( new THREE.Vector3() );
+
 function init() {
   scene = new THREE.Scene();
   camera = new THREE.PerspectiveCamera(
@@ -11,11 +13,19 @@ function init() {
     1,
     1000
   );            // sets camera variables
+
   
-  camera.position.set(50, 20, -20);  // sets camera position inside the maze
+  camera.position.set(50, 30, -20);  // sets camera position inside the maze
+  
+  const geometry = new THREE.BoxGeometry( 10, 10, 10 );                // End of maze
+  const material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
+  var finish = new THREE.Mesh( geometry, material );
+  scene.add( finish );
+  finish.position.set(-150,30,-150);
 
+  // raycaster.setFromCamera( new THREE.Vector2(), camera );                  // testing raycast for collision
 
-  //camera.position.set(50, 400, -20);  // TESTING CAM
+  //camera.position.set(50, 400, -20);                     // TESTING CAM
 
   renderer = new THREE.WebGLRenderer({ antialias: true });  // antiailas
   renderer.setSize(window.innerWidth, window.innerHeight);  // render size
@@ -55,8 +65,7 @@ function init() {
   
   scene.add(plane);
 
-
-  animate();
+  renderer.render(scene, camera);
 }
 
 // When widow size is changed, fixes the scene
@@ -65,12 +74,6 @@ function resizeWindowChanges(){
 		camera.updateProjectionMatrix();
 		renderer.setSize( window.innerWidth, window.innerHeight );
 		render();
-}
-
-function animate() {                                     // renders (on a different function for future controls)
-  renderer.render(scene, camera);
-  requestAnimationFrame(animate);
-
 }
 
 init();                                                  // initialize the display (runs at start)
