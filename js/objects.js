@@ -20,23 +20,85 @@ var wallText;
 
       _createMazeWall()
 
-      let lampx = 28; 
-      let lampy = 0;
-      let lampz = -197;
-      const objLoader = new THREE.OBJLoader();
-      objLoader.load("./raw/lamp.obj", (lamp) => {
-        lamp.position.set(28, 0, -197);
-        scene.add(lamp);
-      });
-      const light = new THREE.PointLight( 0xffffff, 1, 100 );
-      light.position.set( lampx+7, lampy+18, lampz+2 );
-      light.power = 20;
-      scene.add( light );
 
+
+function addLamp(x, y, z, type){
+  let lampx = 0;
+  let lampy = 0;
+  let lampz = 0;
+
+
+if (type == 1){ // positive x, negative z
+  lampx = x+3; 
+  lampy = y;
+  lampz = (z * 2) + 3;
+
+  let objLoader = new THREE.OBJLoader();
+  objLoader.load("./raw/lamp.obj", (lamp) => {
+    lamp.position.set(lampx, lampy, lampz);
+    scene.add(lamp);
+  });
+  let light = new THREE.PointLight( 0xffffff, 1, 100 );
+  light.position.set( lampx+7, lampy+18, lampz+2 );
+  light.power = 30;
+  scene.add( light );
+
+
+}
+else if(type == 2){ // negative x, negative z
+  lampx = x-3; 
+  lampy = y;
+  lampz = (z * 2) - 3;
+
+  let objLoader = new THREE.OBJLoader();
+  objLoader.load("./raw/lamp.obj", (lamp) => {
+    lamp.position.set(lampx, lampy, lampz);
+    scene.add(lamp);
+  });
+  let light = new THREE.PointLight( 0xffffff, 1, 100 );
+  light.position.set( lampx-7, lampy+18, lampz-2 );
+  light.power = 30;
+  scene.add( light );
+}
+else if (type == 3){ // positive x, positive z
+  lampx = x+3; 
+  lampy = y;
+  lampz = (z * 2) - 3;
+
+  let objLoader = new THREE.OBJLoader();
+  objLoader.load("./raw/lamp.obj", (lamp) => {
+    lamp.position.set(lampx, lampy, lampz);
+    scene.add(lamp);
+  });
+  let light = new THREE.PointLight( 0xffffff, 1, 100 );
+  light.position.set( lampx+7, lampy+18, lampz-2 );
+  light.power = 30;
+  scene.add( light );
+}
+else{                 // negative x, positive z
+  lampx = x-3; 
+  lampy = y;
+  lampz = (z * 2) - 3;
+
+  let objLoader = new THREE.OBJLoader();
+  objLoader.load("./raw/lamp.obj", (lamp) => {
+    lamp.position.set(lampx, lampy, lampz);
+    scene.add(lamp);
+  });
+  let light = new THREE.PointLight( 0xffffff, 1, 100 );
+  light.position.set( lampx-7, lampy+18, lampz-2 );
+  light.power = 30;
+  scene.add( light );
+}
+}
 
 
 function _createMazeWall(){
     
+  addLamp(-150, 0, -100, 1);
+  addLamp(100, 0, -50, 1);
+  addLamp(150, 0, 20, 1);
+
   //Left wall middle starting area
   const wallm1l = new THREE.Mesh(
     new THREE.BoxGeometry(wallWidth, wallHeight,wallLength / 2),
@@ -46,6 +108,8 @@ function _createMazeWall(){
     wallm1l.position.set(25, wallHeight/2, -100);         // x, y, z (since we did rotation, y is Up/down)
     wallm1l.material.color.setHex(0xff00ff) // color (makes it bright)
   scene.add(wallm1l);
+    addLamp(25, 0, -100, 1);
+   
   
   //Right wall middle starting point
   const wallm2r = new THREE.Mesh(
@@ -56,6 +120,7 @@ function _createMazeWall(){
     wallm2r.position.set(75, wallHeight/2, -75);         // x, y, z (since we did rotation, y is Up/down)
     wallm2r.material.color.setHex(0xff00ff) // color (makes it bright)
   scene.add(wallm2r);
+  addLamp(75, 0, -75, 1);
 
   //Center middle wall behind character
   const wall3mc = new THREE.Mesh(
@@ -77,6 +142,7 @@ function _createMazeWall(){
     wall1p1.material.color.setHex(0xff00ff) 
   scene.add(wall1p1);
 
+
   //First path second wall
   const wall2p1 = new THREE.Mesh(
     new THREE.BoxGeometry(75, wallHeight,wallWidth),
@@ -86,7 +152,8 @@ function _createMazeWall(){
     wall2p1.position.set(111, wallHeight/2, -100);         // x, y, z (since we did rotation, y is Up/down)
     wall2p1.material.color.setHex(0xff00ff) 
   scene.add(wall2p1);
-
+  addLamp(111, 0, -100, 1);
+  
   //First path vertical wall 1
   const wall3p1 = new THREE.Mesh(
     new THREE.BoxGeometry(wallWidth, wallHeight,250),
@@ -106,6 +173,7 @@ function _createMazeWall(){
     wall4p1.position.set(115, wallHeight/2, 75);         // x, y, z (since we did rotation, y is Up/down)
     wall4p1.material.color.setHex(0xff00ff) // color (makes it bright)
   scene.add(wall4p1);
+  addLamp(115, 0, 75, 3);
 
   //First path vertical wall 3
   const wall5p1 = new THREE.Mesh(
@@ -116,6 +184,7 @@ function _createMazeWall(){
     wall5p1.position.set(75, wallHeight/2, 100);         // x, y, z (since we did rotation, y is Up/down)
     wall5p1.material.color.setHex(0xff00ff) // color (makes it bright)
   scene.add(wall5p1);
+  addLamp(75, 0, 100, 3);
 
   //First path vertical wall long left side
   const wall6p1 = new THREE.Mesh(
@@ -126,6 +195,8 @@ function _createMazeWall(){
     wall6p1.position.set(-65, wallHeight/2, 25);         // x, y, z (since we did rotation, y is Up/down)
     wall6p1.material.color.setHex(0xff00ff) // color (makes it bright)
   scene.add(wall6p1);
+  addLamp(-65, 0, 25, 3);
+
 
   //First path end, horizontal large wall
   const wall7p1 = new THREE.Mesh(
@@ -137,6 +208,7 @@ function _createMazeWall(){
     wall7p1.material.color.setHex(0xff00ff) 
   scene.add(wall7p1);
 
+
   //Second path horizontal small wall
   const wall1p2 = new THREE.Mesh(
     new THREE.BoxGeometry(100, wallHeight,wallWidth),
@@ -146,6 +218,7 @@ function _createMazeWall(){
     wall1p2.position.set(25, wallHeight/2, 37);         // x, y, z (since we did rotation, y is Up/down)
     wall1p2.material.color.setHex(0xff00ff) 
   scene.add(wall1p2);
+  addLamp(25, 0, 37, 3);
 
   //Second path vertical large wall
   const wall2p2 = new THREE.Mesh(
@@ -156,6 +229,7 @@ function _createMazeWall(){
     wall2p2.position.set(-25, wallHeight/2, -53);         // x, y, z (since we did rotation, y is Up/down)
     wall2p2.material.color.setHex(0xff00ff) // color (makes it bright)
   scene.add(wall2p2);
+  addLamp(-25, 0, -53, 1);
 
   //Second path horizontal small wall 2
   const wall3p2 = new THREE.Mesh(
@@ -177,6 +251,7 @@ function _createMazeWall(){
     wall4p2.material.color.setHex(0xff00ff) // color (makes it bright)
   scene.add(wall4p2);
 
+
   //Third path vertical wall south 1
   const wall1p3 = new THREE.Mesh(
     new THREE.BoxGeometry(wallWidth, wallHeight,95),
@@ -187,6 +262,7 @@ function _createMazeWall(){
     wall1p3.material.color.setHex(0xff00ff) // color (makes it bright)
   scene.add(wall1p3);
 
+
   //Third path vertical wall south 2
   const wall2p3 = new THREE.Mesh(
     new THREE.BoxGeometry(wallWidth, wallHeight,125),
@@ -196,6 +272,7 @@ function _createMazeWall(){
     wall2p3.position.set(-25, wallHeight/2, 100);         // x, y, z (since we did rotation, y is Up/down)
     wall2p3.material.color.setHex(0xff00ff) // color (makes it bright)
   scene.add(wall2p3);
+  addLamp(-25, 0, 100, 3);
 
   //Third path close, small wall
   const wall3p3 = new THREE.Mesh(
@@ -207,6 +284,7 @@ function _createMazeWall(){
     wall3p3.material.color.setHex(0xff00ff) 
   scene.add(wall3p3);
 
+
   //Fourth path horizontal wall, path start
   const wall1p4 = new THREE.Mesh(
     new THREE.BoxGeometry(100, wallHeight,wallWidth),
@@ -217,6 +295,7 @@ function _createMazeWall(){
     wall1p4.material.color.setHex(0xff00ff) 
   scene.add(wall1p4);
 
+
   //Fourth path vertical wall long left side
   const wall2p4 = new THREE.Mesh(
     new THREE.BoxGeometry(wallWidth, wallHeight,200),
@@ -226,6 +305,7 @@ function _createMazeWall(){
     wall2p4.position.set(-165, wallHeight/2, 25);         // x, y, z (since we did rotation, y is Up/down)
     wall2p4.material.color.setHex(0xff00ff) // color (makes it bright)
   scene.add(wall2p4);
+  addLamp(-165, 0, 25, 3);
 
   //Fourth path horizontal wall 2
   const wall3p4 = new THREE.Mesh(
@@ -237,6 +317,7 @@ function _createMazeWall(){
     wall3p4.material.color.setHex(0xff00ff) 
   scene.add(wall3p4);
 
+
   //Fourth path vertical wall long left side 2
   const wall4p4 = new THREE.Mesh(
     new THREE.BoxGeometry(wallWidth, wallHeight,200),
@@ -246,6 +327,7 @@ function _createMazeWall(){
     wall4p4.position.set(-115, wallHeight/2, 25);         // x, y, z (since we did rotation, y is Up/down)
     wall4p4.material.color.setHex(0xff00ff) // color (makes it bright)
   scene.add(wall4p4);
+  addLamp(-115, 0, 25, 1);
 }
 
 

@@ -12,8 +12,10 @@ function init() {
     1000
   );            // sets camera variables
   
-  camera.position.set(50, 20, -20);  // sets camera position inside the cube (x (distance), y(height))
+  camera.position.set(50, 20, -20);  // sets camera position inside the maze
 
+
+  //camera.position.set(50, 400, -20);  // TESTING CAM
 
   renderer = new THREE.WebGLRenderer({ antialias: true });  // antiailas
   renderer.setSize(window.innerWidth, window.innerHeight);  // render size
