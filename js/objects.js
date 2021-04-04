@@ -20,10 +20,19 @@ var wallText;
 
       _createMazeWall()
 
-      const objLoader = new OBJLoader();
-      objLoader.load("./raw/lamp.obj", (root) => {
-        scene.add(root);
+      let lampx = 28; 
+      let lampy = 0;
+      let lampz = -197;
+      const objLoader = new THREE.OBJLoader();
+      objLoader.load("./raw/lamp.obj", (lamp) => {
+        lamp.position.set(28, 0, -197);
+        scene.add(lamp);
       });
+      const light = new THREE.PointLight( 0xffffff, 1, 100 );
+      light.position.set( lampx+7, lampy+18, lampz+2 );
+      light.power = 20;
+      scene.add( light );
+
 
 
 function _createMazeWall(){
@@ -35,7 +44,7 @@ function _createMazeWall(){
         map:wallText
       })) // length, width, height
     wallm1l.position.set(25, wallHeight/2, -100);         // x, y, z (since we did rotation, y is Up/down)
-    wallm1l.material.color.setHex(0xffffff) // color (makes it bright)
+    wallm1l.material.color.setHex(0xff00ff) // color (makes it bright)
   scene.add(wallm1l);
   
   //Right wall middle starting point
@@ -45,7 +54,7 @@ function _createMazeWall(){
         map:wallText
       })) // length, width, height
     wallm2r.position.set(75, wallHeight/2, -75);         // x, y, z (since we did rotation, y is Up/down)
-    wallm2r.material.color.setHex(0xffffff) // color (makes it bright)
+    wallm2r.material.color.setHex(0xff00ff) // color (makes it bright)
   scene.add(wallm2r);
 
   //Center middle wall behind character
@@ -55,7 +64,7 @@ function _createMazeWall(){
         map:wallText
       })) // length, width, height
     wall3mc.position.set(50, wallHeight/2, 0);         // x, y, z (since we did rotation, y is Up/down)
-    wall3mc.material.color.setHex(0xffffff) 
+    wall3mc.material.color.setHex(0xff00ff) 
   scene.add(wall3mc);
 
   //First path wall
@@ -65,7 +74,7 @@ function _createMazeWall(){
         map:wallText
       })) // length, width, height
     wall1p1.position.set(111, wallHeight/2, -150);         // x, y, z (since we did rotation, y is Up/down)
-    wall1p1.material.color.setHex(0xffffff) 
+    wall1p1.material.color.setHex(0xff00ff) 
   scene.add(wall1p1);
 
   //First path second wall
@@ -75,7 +84,7 @@ function _createMazeWall(){
         map:wallText
       })) // length, width, height
     wall2p1.position.set(111, wallHeight/2, -100);         // x, y, z (since we did rotation, y is Up/down)
-    wall2p1.material.color.setHex(0xffffff) 
+    wall2p1.material.color.setHex(0xff00ff) 
   scene.add(wall2p1);
 
   //First path vertical wall 1
@@ -85,7 +94,7 @@ function _createMazeWall(){
         map:wallText
       })) // length, width, height
     wall3p1.position.set(150, wallHeight/2, 25);         // x, y, z (since we did rotation, y is Up/down)
-    wall3p1.material.color.setHex(0xffffff) // color (makes it bright)
+    wall3p1.material.color.setHex(0xff00ff) // color (makes it bright)
   scene.add(wall3p1);
 
   //First path vertical wall 2
@@ -95,7 +104,7 @@ function _createMazeWall(){
         map:wallText
       })) // length, width, height
     wall4p1.position.set(115, wallHeight/2, 75);         // x, y, z (since we did rotation, y is Up/down)
-    wall4p1.material.color.setHex(0xffffff) // color (makes it bright)
+    wall4p1.material.color.setHex(0xff00ff) // color (makes it bright)
   scene.add(wall4p1);
 
   //First path vertical wall 3
@@ -105,7 +114,7 @@ function _createMazeWall(){
         map:wallText
       })) // length, width, height
     wall5p1.position.set(75, wallHeight/2, 100);         // x, y, z (since we did rotation, y is Up/down)
-    wall5p1.material.color.setHex(0xffffff) // color (makes it bright)
+    wall5p1.material.color.setHex(0xff00ff) // color (makes it bright)
   scene.add(wall5p1);
 
   //First path vertical wall long left side
@@ -115,7 +124,7 @@ function _createMazeWall(){
         map:wallText
       })) // length, width, height
     wall6p1.position.set(-65, wallHeight/2, 25);         // x, y, z (since we did rotation, y is Up/down)
-    wall6p1.material.color.setHex(0xffffff) // color (makes it bright)
+    wall6p1.material.color.setHex(0xff00ff) // color (makes it bright)
   scene.add(wall6p1);
 
   //First path end, horizontal large wall
@@ -125,7 +134,7 @@ function _createMazeWall(){
         map:wallText
       })) // length, width, height
     wall7p1.position.set(-132, wallHeight/2, -111);         // x, y, z (since we did rotation, y is Up/down)
-    wall7p1.material.color.setHex(0xffffff) 
+    wall7p1.material.color.setHex(0xff00ff) 
   scene.add(wall7p1);
 
   //Second path horizontal small wall
@@ -135,7 +144,7 @@ function _createMazeWall(){
         map:wallText
       })) // length, width, height
     wall1p2.position.set(25, wallHeight/2, 37);         // x, y, z (since we did rotation, y is Up/down)
-    wall1p2.material.color.setHex(0xffffff) 
+    wall1p2.material.color.setHex(0xff00ff) 
   scene.add(wall1p2);
 
   //Second path vertical large wall
@@ -145,7 +154,7 @@ function _createMazeWall(){
         map:wallText
       })) // length, width, height
     wall2p2.position.set(-25, wallHeight/2, -53);         // x, y, z (since we did rotation, y is Up/down)
-    wall2p2.material.color.setHex(0xffffff) // color (makes it bright)
+    wall2p2.material.color.setHex(0xff00ff) // color (makes it bright)
   scene.add(wall2p2);
 
   //Second path horizontal small wall 2
@@ -155,7 +164,7 @@ function _createMazeWall(){
         map:wallText
       })) // length, width, height
     wall3p2.position.set(-61, wallHeight/2, -150);         // x, y, z (since we did rotation, y is Up/down)
-    wall3p2.material.color.setHex(0xffffff) 
+    wall3p2.material.color.setHex(0xff00ff) 
   scene.add(wall3p2);
 
   //Second path close, vertical small wall
@@ -165,7 +174,7 @@ function _createMazeWall(){
         map:wallText
       })) // length, width, height
     wall4p2.position.set(-100, wallHeight/2, -175);         // x, y, z (since we did rotation, y is Up/down)
-    wall4p2.material.color.setHex(0xffffff) // color (makes it bright)
+    wall4p2.material.color.setHex(0xff00ff) // color (makes it bright)
   scene.add(wall4p2);
 
   //Third path vertical wall south 1
@@ -175,7 +184,7 @@ function _createMazeWall(){
         map:wallText
       })) // length, width, height
     wall1p3.position.set(25, wallHeight/2, 115);         // x, y, z (since we did rotation, y is Up/down)
-    wall1p3.material.color.setHex(0xffffff) // color (makes it bright)
+    wall1p3.material.color.setHex(0xff00ff) // color (makes it bright)
   scene.add(wall1p3);
 
   //Third path vertical wall south 2
@@ -185,7 +194,7 @@ function _createMazeWall(){
         map:wallText
       })) // length, width, height
     wall2p3.position.set(-25, wallHeight/2, 100);         // x, y, z (since we did rotation, y is Up/down)
-    wall2p3.material.color.setHex(0xffffff) // color (makes it bright)
+    wall2p3.material.color.setHex(0xff00ff) // color (makes it bright)
   scene.add(wall2p3);
 
   //Third path close, small wall
@@ -195,7 +204,7 @@ function _createMazeWall(){
         map:wallText
       })) // length, width, height
     wall3p3.position.set(0, wallHeight/2, 161);         // x, y, z (since we did rotation, y is Up/down)
-    wall3p3.material.color.setHex(0xffffff) 
+    wall3p3.material.color.setHex(0xff00ff) 
   scene.add(wall3p3);
 
   //Fourth path horizontal wall, path start
@@ -205,7 +214,7 @@ function _createMazeWall(){
         map:wallText
       })) // length, width, height
     wall1p4.position.set(-115, wallHeight/2, 161);         // x, y, z (since we did rotation, y is Up/down)
-    wall1p4.material.color.setHex(0xffffff) 
+    wall1p4.material.color.setHex(0xff00ff) 
   scene.add(wall1p4);
 
   //Fourth path vertical wall long left side
@@ -215,7 +224,7 @@ function _createMazeWall(){
         map:wallText
       })) // length, width, height
     wall2p4.position.set(-165, wallHeight/2, 25);         // x, y, z (since we did rotation, y is Up/down)
-    wall2p4.material.color.setHex(0xffffff) // color (makes it bright)
+    wall2p4.material.color.setHex(0xff00ff) // color (makes it bright)
   scene.add(wall2p4);
 
   //Fourth path horizontal wall 2
@@ -225,7 +234,7 @@ function _createMazeWall(){
         map:wallText
       })) // length, width, height
     wall3p4.position.set(-115, wallHeight/2, 124);         // x, y, z (since we did rotation, y is Up/down)
-    wall3p4.material.color.setHex(0xffffff) 
+    wall3p4.material.color.setHex(0xff00ff) 
   scene.add(wall3p4);
 
   //Fourth path vertical wall long left side 2
@@ -235,7 +244,7 @@ function _createMazeWall(){
         map:wallText
       })) // length, width, height
     wall4p4.position.set(-115, wallHeight/2, 25);         // x, y, z (since we did rotation, y is Up/down)
-    wall4p4.material.color.setHex(0xffffff) // color (makes it bright)
+    wall4p4.material.color.setHex(0xff00ff) // color (makes it bright)
   scene.add(wall4p4);
 }
 
@@ -248,7 +257,7 @@ function _createMainWall(){
         map:wallText
       })) // length, width, height
     wallf.position.set(MIN_SIZE, wallHeight/2, 0);         // x, y, z (since we did rotation, y is Up/down)
-    wallf.material.color.setHex(0xffffff) // color (makes it bright)
+    wallf.material.color.setHex(0xff00ff) // color (makes it bright)
   scene.add(wallf);
 
   const wallb = new THREE.Mesh(
@@ -257,7 +266,7 @@ function _createMainWall(){
         map:wallText
       })) // length, width, height
     wallb.position.set(MAX_SIZE, wallHeight/2, 0);         // x, y, z (since we did rotation, y is Up/down)
-    wallb.material.color.setHex(0xffffff) 
+    wallb.material.color.setHex(0xff00ff) 
   scene.add(wallb);
 
   const walll = new THREE.Mesh(
@@ -266,7 +275,7 @@ function _createMainWall(){
         map:wallText
       })) // length, width, height
     walll.position.set(0, wallHeight/2, MAX_SIZE);         // x, y, z (since we did rotation, y is Up/down)
-    walll.material.color.setHex(0xffffff) 
+    walll.material.color.setHex(0xff00ff) 
   scene.add(walll);
 
   const wallr = new THREE.Mesh(
@@ -275,7 +284,7 @@ function _createMainWall(){
         map:wallText
       })) // length, width, height
     wallr.position.set(0, wallHeight/2, MIN_SIZE);         // x, y, z (since we did rotation, y is Up/down)
-    wallr.material.color.setHex(0xffffff) 
+    wallr.material.color.setHex(0xff00ff) 
   scene.add(wallr);
 
   // <-- End Main Wall 
