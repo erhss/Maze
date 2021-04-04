@@ -14,7 +14,16 @@ var clock = new THREE.Clock();
 
 const menuPanel = document.getElementById('menuPanel');
 const startButton = document.getElementById('startButton');
+let music = document.getElementById("music"); 
+music.loop = true;
 
+function playAudio() { 
+    music.play(); 
+} 
+
+function pauseAudio() { 
+    music.pause(); 
+} 
 
 
 startButton.addEventListener('click', function () {
@@ -24,8 +33,16 @@ startButton.addEventListener('click', function () {
 
 const controls = new THREE.PointerLockControls(camera, document.body);
 //controls.addEventListener('change', () => console.log("Controls Change"))
-controls.addEventListener('lock', () => menuPanel.style.display = 'none');
-controls.addEventListener('unlock', () => menuPanel.style.display = 'block');
+
+controls.addEventListener('lock', function (){
+    menuPanel.style.display = 'none';
+    playAudio();
+    
+});
+controls.addEventListener('unlock', function () {
+     menuPanel.style.display = 'block';
+     pauseAudio();
+    });
 
 let keyboard = [];
 addEventListener('keydown', (e)=>{
