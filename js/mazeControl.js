@@ -1,3 +1,4 @@
+// References:
 // https://github.com/mrdoob/three.js/blob/master/examples/misc_controls_pointerlock.html Used
 // https://www.youtube.com/watch?v=5bc9AN87QtM
 // https://sbcode.net/threejs/pointerlock-controls/
@@ -8,57 +9,48 @@ var clock = new THREE.Clock();
 // testing box 
 // const box = new THREE.Mesh(
 //     new THREE.BoxGeometry(20, 20, 20))
-// box.position.set(50, 10, -70);         // x, y, z (since we did rotation, y is Up/down)
+// box.position.set(50, 10, -70);         
 // box.material.color.setHex(0x0000ff)  // color of box
 // scene.add(box);
 
-const menuPanel = document.getElementById('menuPanel');
-const startButton = document.getElementById('startButton');
-let music = document.getElementById("music"); 
-music.loop = true;
-
-function playAudio() { 
-    music.play(); 
-} 
-
-function pauseAudio() { 
-    music.pause(); 
-} 
+const menuPanel = document.getElementById('menuPanel');             // gets menu id from html
+const startButton = document.getElementById('startButton');         // gets startbutton id from html
+let music = document.getElementById("music");                       // gets music id from html
+music.loop = true;                                                  // loops the music 
 
 
-startButton.addEventListener('click', function () {
+startButton.addEventListener('click', function () {                 // event listener for the start button. sets lock to false
     controls.lock();
     document.body.requestFullscreen();
 }, false);
 
-const controls = new THREE.PointerLockControls(camera, document.body);
-//controls.addEventListener('change', () => console.log("Controls Change"))
+const controls = new THREE.PointerLockControls(camera, document.body);  // imports pointerlock control to camera and controls.
 
-controls.addEventListener('lock', function (){
+controls.addEventListener('lock', function (){                      // if lock is false, takes control of the mouse and starts music.
     menuPanel.style.display = 'none';
-    playAudio();
+    music.play();
     
 });
-controls.addEventListener('unlock', function () {
+controls.addEventListener('unlock', function () {                   // if locked, mouse is released and music is stopped
      menuPanel.style.display = 'block';
-     pauseAudio();
+     music.pause(); 
     });
 
-let keyboard = [];
+let keyboard = [];                                                  // listens to keyboard input and stores in array
 addEventListener('keydown', (e)=>{
     keyboard[e.key] = true;
 });
 
-addEventListener('keyup', (e)=>{
+addEventListener('keyup', (e)=>{                                   // listens to keyboard release and pops from array
     keyboard[e.key] = false;
 });
 
 
-function processKeyboard(delta){            // Uses time-delta so that speed is not dependent on framerate
+function processKeyboard(delta){                                    // processes the keys pressed
     let speed = 50;
-    let actualSpeed = speed * delta;
+    let actualSpeed = speed * delta;                                 // Uses time-delta so that speed is not dependent on framerate.
     
-    if (keyboard['w'] || keyboard['ArrowUp']){
+    if (keyboard['w'] || keyboard['ArrowUp']){                      // if w is pressed, move forward etc...
         controls.moveForward(actualSpeed);
     }
 
@@ -73,32 +65,14 @@ function processKeyboard(delta){            // Uses time-delta so that speed is 
     if (keyboard['d'] || keyboard['ArrowRight']){
         controls.moveRight(actualSpeed);
     }
-    //drawScene();
 }
 
 
 
-function drawScene() {
-    
-    // Future raycast potential addons for collision detection. 
-
-    // raycaster.setFromCamera( new THREE.Vector2(), camera ); 
-
-    // var objects = raycaster.intersectObjects(scene.children);                    // testing raycast for collision
-    //         if (objects.length <=1) {
-    //             for (var i in objects) {
-    //               objects[i].object.material.color.set( 0xffffff );            
-    //             }
-    //         }
-    //         else{
-    //             for (var i in objects) {
-    //                 objects[i].object.material.color.set( 0xff00ff );            
-    //               }
-
-    //         } 
+function drawScene() {                                                              // draws the scene again and re-renders it.
 
     renderer.render(scene, camera);
-    let delta = clock.getDelta();
+    let delta = clock.getDelta();                                                   // gets change in time
     processKeyboard(delta);
 
     requestAnimationFrame(drawScene);

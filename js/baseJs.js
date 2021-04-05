@@ -17,13 +17,11 @@ function init() {
   
   camera.position.set(50, 30, -20);  // sets camera position inside the maze
   
-  const geometry = new THREE.BoxGeometry( 10, 10, 10 );                // End of maze
+  const geometry = new THREE.BoxGeometry( 10, 10, 10 );           
   const material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
-  var finish = new THREE.Mesh( geometry, material );
+  var finish = new THREE.Mesh( geometry, material );                    // shows box at end of maze
   scene.add( finish );
   finish.position.set(-150,30,-150);
-
-  // raycaster.setFromCamera( new THREE.Vector2(), camera );                  // testing raycast for collision
 
   //camera.position.set(50, 400, -20);                     // TESTING CAM
 
@@ -46,10 +44,10 @@ function init() {
   ]);
   scene.background = texture;                           // sets the background for the scene as cubebox
 
-  amLight = new THREE.AmbientLight(0xffffff, 0.2);
+  amLight = new THREE.AmbientLight(0xffffff, 0.2);    // adds ambient light. very dim
   scene.add(amLight);
 
-  let texture1 = new THREE.TextureLoader().load("./raw/ground2.jpg", function ( texture ){
+  let texture1 = new THREE.TextureLoader().load("./raw/ground2.jpg", function ( texture ){    // makes the ground texture 100x100 in the plane
     texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
     texture.offset.set( 0, 0 );
     texture.repeat.set( 100, 100 );
@@ -59,7 +57,7 @@ function init() {
   new THREE.BoxGeometry(400, 400,1),
   new THREE.MeshPhongMaterial({
     map:texture1
-  }))        // creates a square cube plane for terrain
+  }))                                        // creates a square cube plane for ground
   plane.material.color.setHex( 0x0fffff );
   plane.rotation.x = -Math.PI/2;          // Make the plane horizontal instead of vertical
   
@@ -68,7 +66,7 @@ function init() {
   renderer.render(scene, camera);
 }
 
-// When widow size is changed, fixes the scene
+// When widow size is changed, resizes the scene properly
 function resizeWindowChanges(){
     camera.aspect = window.innerWidth / window.innerHeight;
 		camera.updateProjectionMatrix();
